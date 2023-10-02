@@ -41,18 +41,18 @@ def reset_world():
 
     points = [ (100, 900), (1200, 800), (500, 100)]
 
-    # set_new_target_arrow()
+    set_new_target_arrow()
 
 
-# def set_new_target_arrow():
-#     global sx, sy, hx, hy, t
-#     global action, frame
-#     sx, sy = cx, cy  # p1: 시작점
-#     # hx, hy = 100, 100
-#     hx, hy = random.randint(0, TUK_WIDTH), random.randint(0, TUK_WIDTH)  # p2: 끝점
-#     action = 1 if sx < hx else 0
-#     t = 0.0
-#     frame = 0
+def set_new_target_arrow():
+    global sx, sy, hx, hy, t
+    global action, frame
+    sx, sy = cx, cy  # p1: 시작점
+    # hx, hy = 100, 100
+    hx, hy = points[0]  # p2: 끝점
+    action = 1 if sx < hx else 0
+    t = 0.0
+    frame = 0
 
 
 def render_world():
@@ -71,13 +71,13 @@ def update_world():
 
     frame = (frame + 1) % 8
 
-    # if (t <= 1.0):
-    #     cx = (1 - t) * sx + t * hx  # cx는 시작 x점과 끝 x점을 1-t와 t의 비율로 섞은 위치
-    #     cy = (1 - t) * sy + t * hy
-    #     t += 0.001
-    # else:
-    #     cx, cy = hx, hy # 캐릭터 위치를 목적지 위치와 정확히 위치시킴
-    #     set_new_target_arrow()
+    if (t <= 1.0):
+        cx = (1 - t) * sx + t * hx  # cx는 시작 x점과 끝 x점을 1-t와 t의 비율로 섞은 위치
+        cy = (1 - t) * sy + t * hy
+        t += 0.001
+    else:
+        cx, cy = hx, hy # 캐릭터 위치를 목적지 위치와 정확히 위치시킴
+        set_new_target_arrow()
 
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 hide_cursor()
